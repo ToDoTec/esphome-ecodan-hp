@@ -32,7 +32,10 @@ namespace ecodan
             float target_temp = this->get_target_temp();
             if (this->target_temperature != target_temp && !std::isnan(target_temp)) {
                 this->target_temperature = target_temp;
+				//ESP_LOGE(TAG, "target_temp: %f", target_temp);
+				//ESP_LOGE(TAG, "this_target_temp: %f", this->target_temperature);
                 validate_target_temperature();
+				//ESP_LOGE(TAG, "val_this_target_temp: %f", this->target_temperature);
                 should_publish = true;
             }
         }
@@ -220,7 +223,9 @@ namespace ecodan
         }
         else {
             auto is_cooling = this->mode == climate::ClimateMode::CLIMATE_MODE_COOL;
-            min_limit = is_cooling ? 5 : 24;
+            // set minimum limit in heating mode to 20 (minimum for heat compensation curve in unit)
+            // otherwise target_temp is published repeatly as input condition is alwasy true (->line 33)
+            min_limit = is_cooling ? 5 : 20;
             max_limit = is_cooling ? 20 : 60;
         }
     }
