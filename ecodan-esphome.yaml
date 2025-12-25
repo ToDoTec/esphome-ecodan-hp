@@ -47,11 +47,11 @@ packages:
 # # svc_z2: !include confs/server-control-z2.yaml
 # # change language labels to -en for English or -nl for Dutch
 # # substitutions: !include confs/ecodan-labels-nl.yaml
- substitutions: !include confs/ecodan-labels-en.yaml
+ substitutions: !include confs/ecodan-labels-mqtt.yaml
  dbg: !include confs/debug.yaml
  wifi: !include confs/wifi.yaml
  energy: !include confs/energy.yaml
- cpu: !include confs/cpu-monitoring.yaml
+# cpu: !include confs/cpu-monitoring.yaml
 #  #svc: !include confs/server-control-z1.yaml
 
 # external_components:

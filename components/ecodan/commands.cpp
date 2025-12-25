@@ -213,27 +213,42 @@ namespace ecodan
 
     #define MAX_STATUS_CMD_SIZE 20
     Message statusCmdQueue[MAX_STATUS_CMD_SIZE] = {
-        Message{MsgType::GET_CMD, GetType::DATETIME_FIRMWARE},
-        Message{MsgType::GET_CMD, GetType::DEFROST_STATE},
-        Message{MsgType::GET_CMD, GetType::ERROR_STATE},
-        Message{MsgType::GET_CMD, GetType::COMPRESSOR_FREQUENCY},
-        Message{MsgType::GET_CMD, GetType::DHW_STATE},
-        Message{MsgType::GET_CMD, GetType::HEATING_POWER},
-        Message{MsgType::GET_CMD, GetType::TEMPERATURE_CONFIG},
-        Message{MsgType::GET_CMD, GetType::SH_TEMPERATURE_STATE},
-        Message{MsgType::GET_CMD, GetType::TEMPERATURE_STATE_A},
-        Message{MsgType::GET_CMD, GetType::TEMPERATURE_STATE_B},
-        Message{MsgType::GET_CMD, GetType::TEMPERATURE_STATE_C},
-        Message{MsgType::GET_CMD, GetType::TEMPERATURE_STATE_D},
-        Message{MsgType::GET_CMD, GetType::EXTERNAL_STATE},
-        Message{MsgType::GET_CMD, GetType::ACTIVE_TIME},
-        Message{MsgType::GET_CMD, GetType::PUMP_STATUS},
-        Message{MsgType::GET_CMD, GetType::FLOW_RATE},
-        Message{MsgType::GET_CMD, GetType::MODE_FLAGS_A},
-        Message{MsgType::GET_CMD, GetType::MODE_FLAGS_B},
-        Message{MsgType::GET_CMD, GetType::ENERGY_USAGE},
-        Message{MsgType::GET_CMD, GetType::ENERGY_DELIVERY}
+        Message{MsgType::GET_CMD, GetType::DATETIME_FIRMWARE},      //0x01
+        Message{MsgType::GET_CMD, GetType::DEFROST_STATE},			//0x02
+        Message{MsgType::GET_CMD, GetType::ERROR_STATE},			//0x03
+        Message{MsgType::GET_CMD, GetType::COMPRESSOR_FREQUENCY},	//0x04
+        Message{MsgType::GET_CMD, GetType::DHW_STATE},				//0x05
+        Message{MsgType::GET_CMD, GetType::HEATING_POWER},			//0x07
+        Message{MsgType::GET_CMD, GetType::TEMPERATURE_CONFIG},		//0x09
+        Message{MsgType::GET_CMD, GetType::SH_TEMPERATURE_STATE},	//0x0B
+        Message{MsgType::GET_CMD, GetType::TEMPERATURE_STATE_A},	//0x0C
+        Message{MsgType::GET_CMD, GetType::TEMPERATURE_STATE_B},	//0x0D
+        Message{MsgType::GET_CMD, GetType::TEMPERATURE_STATE_C},	//0x0E
+        Message{MsgType::GET_CMD, GetType::TEMPERATURE_STATE_D},	//0x0D
+        Message{MsgType::GET_CMD, GetType::EXTERNAL_STATE},			//0x10
+        Message{MsgType::GET_CMD, GetType::ACTIVE_TIME},			//0x13
+        Message{MsgType::GET_CMD, GetType::PUMP_STATUS},			//0x15
+        Message{MsgType::GET_CMD, GetType::FLOW_RATE},				//0x14
+        Message{MsgType::GET_CMD, GetType::MODE_FLAGS_A},			//0x26
+        Message{MsgType::GET_CMD, GetType::MODE_FLAGS_B},			//0x28
+        Message{MsgType::GET_CMD, GetType::ENERGY_USAGE},			//0xA1
+        Message{MsgType::GET_CMD, GetType::ENERGY_DELIVERY},		//0xA2
+		//Message{MsgType::GET_CMD, GetType::UNKNOWN_0x06},			//0x??
     };
+        //UNKNOWN_0x06 = 0x06,
+        //UNKNOWN_0x16 = 0x16,
+        //UNKNOWN_0x17 = 0x17,
+        //UNKNOWN_0x18 = 0x18,
+        //UNKNOWN_0x19 = 0x19,
+        //UNKNOWN_0x1A = 0x1A,
+        //UNKNOWN_0x1B = 0x1B,
+        //UNKNOWN_0x1C = 0x1C,
+        //UNKNOWN_0x1D = 0x1D,
+        //UNKNOWN_0x1E = 0x1E,
+        //UNKNOWN_0x1F = 0x1F,
+        //UNKNOWN_0x20 = 0x20,
+        //UNKNOWN_0x27 = 0x27, // dhw eco mode setting        
+        //UNKNOWN_0x29 = 0x29, 
 
     struct ServiceCodeRuntime {
         Status::REQUEST_CODE Request;
@@ -242,17 +257,19 @@ namespace ecodan
         std::chrono::time_point<std::chrono::steady_clock> LastAttempt{};
     };
 
-    #define MAX_SERVICE_CODE_CMD_SIZE 5
+    #define MAX_SERVICE_CODE_CMD_SIZE 9
     ServiceCodeRuntime serviceCodeCmdQueue[MAX_SERVICE_CODE_CMD_SIZE] = {
-        ServiceCodeRuntime{Status::REQUEST_CODE::COMPRESSOR_STARTS, false, 60*60, std::chrono::steady_clock::now() - std::chrono::seconds(60*60)},
-        ServiceCodeRuntime{Status::REQUEST_CODE::TH4_DISCHARGE_TEMP, true, 0, std::chrono::steady_clock::time_point{}},
-        ServiceCodeRuntime{Status::REQUEST_CODE::TH3_LIQUID_PIPE1_TEMP, true, 0, std::chrono::steady_clock::time_point{}},
-        //ServiceCodeRuntime{Status::REQUEST_CODE::TH6_2_PHASE_PIPE_TEMP, true, 0, std::chrono::steady_clock::time_point{}},
-        //ServiceCodeRuntime{Status::REQUEST_CODE::TH32_SUCTION_PIPE_TEMP, true, 0, std::chrono::steady_clock::time_point{}},
-        //ServiceCodeRuntime{Status::REQUEST_CODE::TH8_HEAT_SINK_TEMP, true, 0, std::chrono::steady_clock::time_point{}},
-        ServiceCodeRuntime{Status::REQUEST_CODE::DISCHARGE_SUPERHEAT, true, 0, std::chrono::steady_clock::time_point{}},
-        //ServiceCodeRuntime{Status::REQUEST_CODE::SUB_COOL, true, 0, std::chrono::steady_clock::time_point{}},
-        ServiceCodeRuntime{Status::REQUEST_CODE::FAN_SPEED, false, 2*60, std::chrono::steady_clock::time_point{}}
+        ServiceCodeRuntime{Status::REQUEST_CODE::COMPRESSOR_STARTS, false, 60*60, std::chrono::steady_clock::now() - std::chrono::seconds(60*60)}, //ID003
+        ServiceCodeRuntime{Status::REQUEST_CODE::TH4_DISCHARGE_TEMP, true, 0, std::chrono::steady_clock::time_point{}},                            //ID004
+        ServiceCodeRuntime{Status::REQUEST_CODE::TH3_LIQUID_PIPE1_TEMP, true, 0, std::chrono::steady_clock::time_point{}},                         //ID005
+        ServiceCodeRuntime{Status::REQUEST_CODE::TH6_2_PHASE_PIPE_TEMP, true, 0, std::chrono::steady_clock::time_point{}},                         //ID007
+        ServiceCodeRuntime{Status::REQUEST_CODE::TH32_SUCTION_PIPE_TEMP, true, 0, std::chrono::steady_clock::time_point{}},                        //ID008
+        ServiceCodeRuntime{Status::REQUEST_CODE::TH8_HEAT_SINK_TEMP, true, 0, std::chrono::steady_clock::time_point{}},                            //ID010
+		//ServiceCodeRuntime{Status::REQUEST_CODE::TH33_SURFACE_TEMP, true, 0, std::chrono::steady_clock::time_point{}},                             //ID011
+        ServiceCodeRuntime{Status::REQUEST_CODE::DISCHARGE_SUPERHEAT, true, 0, std::chrono::steady_clock::time_point{}},                           //ID012
+        ServiceCodeRuntime{Status::REQUEST_CODE::SUB_COOL, true, 0, std::chrono::steady_clock::time_point{}},                                      //ID013
+        //ServiceCodeRuntime{Status::REQUEST_CODE::T63HS_COND_TEMP, true, 0, std::chrono::steady_clock::time_point{}},                               //ID014
+        ServiceCodeRuntime{Status::REQUEST_CODE::FAN_SPEED, false, 2*60, std::chrono::steady_clock::time_point{}},                                  //ID019
     };
 
     bool EcodanHeatpump::dispatch_next_status_cmd()
@@ -290,7 +307,6 @@ namespace ecodan
             //ESP_LOGE(TAG, "Active svc: %d", static_cast<int16_t>(activeRequestCode));
             return true;
         }
-
         cmdIndex = (cmdIndex + 1) % (!initialCmdCompleted() ? MAX_INITIAL_CMD_SIZE : MAX_STATUS_CMD_SIZE);
         auto& cmd = !initialCmdCompleted() ? initialCmdQueue[cmdIndex] : statusCmdQueue[cmdIndex];
         if (!serial_tx(cmd))

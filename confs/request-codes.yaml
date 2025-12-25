@@ -3,9 +3,9 @@ sensor:
     compressor_starts:
       id: compressor_starts
       name: ${compressor_starts}
-    discharge_temp:
-      id: discharge_temp
-      name: ${discharge_temp}
+    ou_discharge_temp:
+      id: ou_discharge_temp
+      name: ${ou_discharge_temp}
     ou_liquid_pipe_temp:
       id: ou_liquid_pipe_temp
       name: ${ou_liquid_pipe_temp}
@@ -28,6 +28,9 @@ sensor:
     sub_cool_temp:
       id: sub_cool_temp
       name: ${sub_cool_temp}
+    cond_temp:
+      id: cond_temp
+      name: ${cond_temp}      
     fan_speed:
       id: fan_speed
       name: ${fan_speed}

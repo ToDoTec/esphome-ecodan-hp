@@ -319,7 +319,7 @@ CONFIG_SCHEMA = cv.Schema(
             icon="mdi:counter",
             entity_category=ENTITY_CATEGORY_NONE,
         ),
-        cv.Optional("discharge_temp"): sensor.sensor_schema(
+        cv.Optional("ou_discharge_temp"): sensor.sensor_schema(
             unit_of_measurement=UNIT_CELSIUS,
             icon="mdi:coolant-temperature",
             accuracy_decimals=1,
@@ -375,6 +375,13 @@ CONFIG_SCHEMA = cv.Schema(
             device_class=DEVICE_CLASS_TEMPERATURE,
             state_class=STATE_CLASS_MEASUREMENT,
         ),
+        cv.Optional("cond_temp"): sensor.sensor_schema(
+            unit_of_measurement=UNIT_CELSIUS,
+            icon="mdi:coolant-temperature",
+            accuracy_decimals=1,
+            device_class=DEVICE_CLASS_TEMPERATURE,
+            state_class=STATE_CLASS_MEASUREMENT,
+        ),
         cv.Optional("fan_speed"): sensor.sensor_schema(
             unit_of_measurement=UNIT_REVOLUTIONS_PER_MINUTE,
             icon="mdi:fan",
@@ -408,5 +415,5 @@ async def to_code(config):
         if id and id.type == sensor.Sensor:
             sens = await sensor.new_sensor(conf)
             cg.add(hp.register_sensor(sens, key))
-            if key in ["compressor_starts", "discharge_temp", "ou_liquid_pipe_temp", "ou_two_phase_pipe_temp", "fan_speed"]:
+            if key in ["compressor_starts", "ou_discharge_temp", "ou_liquid_pipe_temp", "ou_two_phase_pipe_temp", "fan_speed"]:
                 cg.add(hp.enable_request_code_sensors())

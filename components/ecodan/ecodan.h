@@ -74,6 +74,7 @@ namespace ecodan
         void set_dhw_force(bool on);
         void set_holiday(bool on);
         void set_power_mode(bool on);
+		void set_debug_field(uint8_t debug_field);
         void set_hp_mode(uint8_t mode, esphome::ecodan::Zone zone);
         void set_controller_mode(CONTROLLER_FLAG flag, bool on);
         void set_mrc_mode(Status::MRC_FLAG flag);

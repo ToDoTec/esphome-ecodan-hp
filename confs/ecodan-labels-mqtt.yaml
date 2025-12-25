@@ -1,0 +1,174 @@
+substitutions:
+  status_three_way_valve: flg_hb_3way
+  status_three_way_valve_2: flg_dhw_3way
+  heatpump_climate_dhw: na_climate_dhw
+  dhw_temp: t_dhw
+  dhw_secondary_temp: na_t_dhw_second
+  status_dhw_forced: flg_dhw_forced
+  dhw_flow_temp_drop: t_dhw_drop_max
+  status_prohibit_dhw: flg_dhw_prohibit
+  dhw_flow_temp_target: t_dhw_flow_set
+  status_dhw_eco: flg_dhw_eco
+  esp_ip: st_esp_ip
+  internal_esp_temperature: t_esp_internal
+  esp_sidd: st_esp_ssid
+  uptime: time_esp_up
+  esp_version: st_esp_version
+  restart_button: sw_esp_restart
+  status_in1_request: na_flg_in1_thermostat
+  status_in6_request: na_flg_in6_thermostat
+  status_in5_request: na_flg_in5_thermostat
+  heatpump_select_dhw_mode: sw_dhw_mode
+  normal: Normal
+  eco: Eco
+  version: st_esp_version2
+  led_brightness: LED Brightness
+  led_switch: LED
+  heatpump_switch_force_dhw: sw_dhwforce
+  heatpump_switch_power_mode: sw_heatpump
+  heatpump_switch_holiday: sw_holiday
+  wifi_signal_proc: perc_wifi
+  wifi_signal_db: db_wifi
+  z1_flow_temp_target: t_zone1_flow_set
+  status_prohibit_cool_z1: flg_zone1_prohibit_cooling
+  status_prohibit_heating_z1: flg_zone1_prohibit_heating
+  heatpump_climate_z1: na_climate_zone1_flow
+  heatpump_climate_room_z1: na_climate_zone1_room
+  z1_room_temp_target: t_zone1_room_set
+  z1_room_temp: t_zone1_room
+  heatpump_number_z2_set_flow_temperature: Zone 2 H/C setpoint
+  z2_flow_temp_target: t_zone2_flow_set
+  status_prohibit_cool_z2: flg_zone2_prohibit_cooling
+  status_prohibit_heating_z2: flg_zone2_prohibit_heating
+  heatpump_number_z2_set_room_temperature: Zone 2 Room Setpoint
+  heatpump_climate_z2: na_climate_zone2_flow
+  heatpump_climate_room_z2: na_climate_zone2_room
+  z2_room_temp_target: t_zone2_room_set
+  z2_room_temp: t_zone2_room
+  mixing_tank_temp: t_hb_mixtank
+  boiler_flow_temp: na_t_hb_boiler_flow
+  boiler_return_temp: na_t_hb_boiler_return
+  status_booster: na_flg_hb_boosterheater
+  compressor_frequency: frq_hp_compressor
+  status_compressor: flg_hp_compressor
+  controller_version_text: st_hb_version
+  controller_firmware_text: st_hb_firmware
+  controller_datetime_text: st_hb_date
+  cool_consumed: e_hp_cool_consumed
+  cool_cop: cop_hp_cool
+  cool_delivered: e_hp_cool_delivered
+  status_defrost: flg_hb_defrost
+  dhw_consumed: e_hp_dhw_consumed
+  dhw_cop: cop_hp_dhw
+  dhw_delivered: e_hp_dhw_delivered
+  hp_feed_temp: t_hb_feed
+  z1_feed_temp: t_zone1_feed
+  z2_feed_temp: t_zone2_feed
+  flow_rate: vf_hb
+  heat_source_text: st_hb_heatsource
+  heatpump: Heatpump
+  immersion_heater: na_st_hb_immersion_heater
+  booster_heater: na_st_hb_heater
+  immersion_and_booster_heater: na_st_hb_immersion_and_booster_heater
+  boiler: na_st_hb_boiler
+  energy_consumed_increasing: Total Energy Consumed
+  heating_consumed: e_hp_heat_consumed
+  heating_cop: cop_hp_heat
+  heating_delivered: e_hp_heat_delivered
+  status_holiday: flg_hb_holiday
+  status_immersion: na_flg_hb_immersion
+  legionella_prevention_temp: t_hb_legionella_prevent
+  zone1_select_operating_mode: sw_zone1_operating_mode
+  zone2_select_operating_mode: sw_zone2_operating_mode
+  heat_target_temperature: Heat Target Temperature
+  heat_flow_temperature: Heat Flow Temperature
+  heat_compensation_curve: Heat Compensation Curve
+  cool_target_temperature: Cool Target Temperature
+  cool_flow_temperature: Cool Flow Temperature
+  floor_dry_up: Floor Dry Up
+  cool_compensation_curve: Cool Compensation Curve
+  operation_off: "Off"
+  hotwater: Heating Water
+  heating: Space Heating
+  cooling: Space Cooling
+  frost_protection: Frost Protection
+  legionella_prevention: Legionella Prevention
+  runtime: t_hp_operation_runtime
+  status_operation: st_hp_operation_mode
+  output_power: pwr_hp_out
+  computed_output_power: pwr_hp_out_computed
+  computed_cop: cop_hp_computed
+  daily_computed_output_power: e_hp_daily_delivered
+  daily_repported_input_power: e_hp_daily_consumed
+  outside_temp: t_hp_ambient
+  hp_refrigerant_temp: t_hp_expvlv_highp
+  hp_refrigerant_condensing_temp: na_t_hp_cond
+  hp_return_temp: t_hb_return
+  z1_return_temp: t_zone1_return
+  z2_return_temp: t_zone2_return
+  status_water_pump: flg_hb_pump
+  status_water_pump_2: flg_zone1_pump
+  status_water_pump_3: flg_zone2_pump
+  status_mixing_valve: st_hb_mixing
+  mixing_valve_step: cnt_hb_mixing
+  status_multi_zone: st_hb_multizone
+  status_multi_zone_idle: Idle
+  status_multi_zone_both: Both
+  status_multi_zone_zone1: Zone1 Working
+  status_multi_zone_zone2: Zone2 Working
+  fault_code_text: st_hp_error
+  refrigerant_error_code_text: st_hp_refrig_error
+  refrigerant_code: st_hp_refrig_code
+  compressor_starts: cnt_hp_comp_starts_id003
+  ou_discharge_temp: t_hp_comp_discharge_id_id004
+  ou_liquid_pipe_temp: t_hp_expvlv_lowp_id005
+  ou_two_phase_pipe_temp: t_hp_2phase_lowp_id007
+  ou_suction_pipe_temp: t_hp_comp_suction_id008
+  ou_heatsink_temp: t_hp_heatsink_id010
+  ou_compressor_surface_temp: na_t_hp_comp_heatsink_id_id011
+  super_heat_temp: t_hp_comp_superheat_id012
+  sub_cool_temp: t_hp_evap_subcool_id013
+  cond_temp: na_t_hp_cond_id014
+  fan_speed: spd_hp_fan_id019
+  # short cycle translations
+  status_short_cycle_lockout: 'Short-Cycle: Lockout'
+  minimum_compressor_on_time: 'Short-Cycle: Minimum On-Time'
+  lockout_duration: 'Short-Cycle: Lockout Duration (min)'
+  short_cycle_mitigation_button: 'Short-Cycle: Cancel Lockout'
+  predictive_short_cycle_control_enabled: 'Short-Cycle: Predictive Prevention'
+  predictive_short_cycle_high_delta_time_window: 'Short-Cycle: High Delta Duration'
+  predictive_short_cycle_high_delta_threshold: 'Short-Cycle: High Delta Threshold'
+  status_predictive_boost_active: 'Short-Cycle: Predictive Boost Active'
+  # auto adaptive translations
+  auto_adaptive_control_enabled: 'Auto-Adaptive: Control'
+  maximum_heating_flow_temp: 'Auto-Adaptive: Max. Heating Flow Temperature'
+  minimum_heating_flow_temp: 'Auto-Adaptive: Min. Heating Flow Temperature'
+  minimum_cooling_flow_temp: 'Auto-Adaptive: Min. Cooling Flow Temperature'
+  cooling_smart_start_temp: 'Auto-Adaptive: Cooling Smart Start Temp'
+  temperature_feedback_source: 'Auto-Adaptive: Room Temperature source'
+  temperature_feedback_option_room: 'Room Thermostat'
+  select_feedback_option_api: 'Home Assistant / REST API'
+  heating_system_type: 'Auto-Adaptive: Heating System Type'
+  heating_system_type_option_ufh: 'Underfloor Heating'
+  heating_system_type_option_ufh_rad: 'Underfloor Heating + Radiators'
+  heating_system_type_option_rad: 'Radiators'
+  auto_adaptive_setpoint_bias: 'Auto-Adaptive: Setpoint Bias'
+  temperature_feedback: 'Auto-Adaptive: Current Room Temperature Feedback'
+  defrost_risk_handling_enabled: 'Auto-Adaptive: Defrost Mitigation'
+  smart_boost_enabled: 'Auto-Adaptive: Smart Boost'
+
+  # total increasing energy totals
+  total_increasing_heating_consumed: e_hp_heat_consumed_total
+  total_increasing_heating_delivered: e_hp_heat_delivered_total
+  total_increasing_cool_consumed: e_hp_cool_consumed_total
+  total_increasing_cool_delivered: e_hp_cool_delivered_total
+  total_increasing_dhw_consumed: e_hp_dhw_consumed_total
+  total_increasing_dhw_delivered: e_hp_dhw_delivered_total
+
+  # pump details
+  pump_speed: st_hb_pump_speed
+  pump_feedback: p_hb_pump_elec
+  pump_feedback_status: st_hb_pump
+
+  # master thermostats
+  master_thermostat: st_room_sensor

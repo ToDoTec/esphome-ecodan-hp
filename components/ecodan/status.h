@@ -79,6 +79,8 @@ namespace ecodan
 
         // refrigerant code
         uint8_t RefrigerantCode = 255;
+		
+		uint8_t debug_field = 0xFF;
 
         // datime of controller
         struct tm ControllerDateTime = {0, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -136,6 +138,7 @@ namespace ecodan
             TH33_SURFACE_TEMP = 11,
             DISCHARGE_SUPERHEAT = 12,
             SUB_COOL = 13,
+			T63HS_COND_TEMP = 14,
             FAN_SPEED = 19,
             NONE = 0x7fff
         };
@@ -173,7 +176,7 @@ namespace ecodan
 
         // Service codes
         uint16_t RcCompressorStarts;
-        float RcDischargeTemp;
+        float RcOuDischargeTemp;
         float RcOuLiquidPipeTemp;
         float RcOuTwoPhasePipeTemp;
         float RcOuSuctionPipeTemp;
@@ -181,6 +184,7 @@ namespace ecodan
         float RcOuCompressorSurfaceTemp;
         float RcDischargeSuperHeatTemp;
         float RcSubCoolTemp;
+		float RcCondTemp;
         uint16_t RcFanSpeedRpm;
 
         // Configured thermostat

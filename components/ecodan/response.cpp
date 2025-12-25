@@ -34,9 +34,19 @@ namespace ecodan
         return fault_code;
     }
 
+    void EcodanHeatpump::set_debug_field(uint8_t debug_field)
+    {
+        status.debug_field = debug_field;
+    }
+
     void EcodanHeatpump::handle_get_response(Message& res)
     {
-        switch (res.payload_type<GetType>())
+        if ((static_cast<uint8_t>(res.payload_type<GetType>())==status.debug_field) && (static_cast<uint8_t>(res.payload_type<GetType>())!= 0xFF)) {			
+			ESP_LOGW(TAG, "Filter type: %s", res.debug_dump_packet().c_str());
+		}
+		//ESP_LOGW(TAG, "TYPE on serial port: %u", static_cast<uint8_t>(res.payload_type<GetType>()));
+		//ESP_LOGW(TAG, "Filter type: %u", status.debug_field);
+		switch (res.payload_type<GetType>())
         {
         case GetType::SERVICE_REQUEST_CODE:
             if (res[3] != 0 && (activeRequestCode != Status::REQUEST_CODE::NONE || proxy_available())) {
@@ -44,46 +54,49 @@ namespace ecodan
                 if (activeRequestCode == res_request_code) {
                     activeRequestCode = Status::REQUEST_CODE::NONE;
                 }
-
                 if (res[3] == 2 || res[3] == 1) {
                     switch(res_request_code) {
-                        case Status::REQUEST_CODE::COMPRESSOR_STARTS:
+                        case Status::REQUEST_CODE::COMPRESSOR_STARTS:                   //ID003
                             status.RcCompressorStarts = res.get_uint16_v2(4) * 100;
                             publish_state("compressor_starts", static_cast<float>(status.RcCompressorStarts));
                         break;
-                        case Status::REQUEST_CODE::TH4_DISCHARGE_TEMP:
-                            status.RcDischargeTemp = res.get_int16_v2(4);
-                            publish_state("discharge_temp", status.RcDischargeTemp);
+                        case Status::REQUEST_CODE::TH4_DISCHARGE_TEMP:                  //ID004
+                            status.RcOuDischargeTemp = res.get_int16_v2(4);
+                            publish_state("ou_discharge_temp", status.RcOuDischargeTemp);
                         break;
-                        case Status::REQUEST_CODE::TH3_LIQUID_PIPE1_TEMP:
+                        case Status::REQUEST_CODE::TH3_LIQUID_PIPE1_TEMP:               //ID005
                             status.RcOuLiquidPipeTemp = res.get_int16_v2(4);
                             publish_state("ou_liquid_pipe_temp", status.RcOuLiquidPipeTemp); 
                         break;
-                        case Status::REQUEST_CODE::TH6_2_PHASE_PIPE_TEMP:
+                        case Status::REQUEST_CODE::TH6_2_PHASE_PIPE_TEMP:               //ID007
                             status.RcOuTwoPhasePipeTemp = res.get_int16_v2(4);
                             publish_state("ou_two_phase_pipe_temp", status.RcOuTwoPhasePipeTemp); 
                         break;
-                        case Status::REQUEST_CODE::TH32_SUCTION_PIPE_TEMP:
+                        case Status::REQUEST_CODE::TH32_SUCTION_PIPE_TEMP:              //ID008
                             status.RcOuSuctionPipeTemp = res.get_int16_v2(4);
                             publish_state("ou_suction_pipe_temp", status.RcOuSuctionPipeTemp); 
                         break;
-                        case Status::REQUEST_CODE::TH8_HEAT_SINK_TEMP:
+                        case Status::REQUEST_CODE::TH8_HEAT_SINK_TEMP:                  //ID010
                             status.RcOuHeatSinkTemp = res.get_int16_v2(4);
                             publish_state("ou_heatsink_temp", status.RcOuHeatSinkTemp); 
                         break;
-                        case Status::REQUEST_CODE::TH33_SURFACE_TEMP:
+                        case Status::REQUEST_CODE::TH33_SURFACE_TEMP:                   //ID011
                             status.RcOuCompressorSurfaceTemp = res.get_int16_v2(4);
                             publish_state("ou_compressor_surface_temp", status.RcOuCompressorSurfaceTemp); 
                         break;
-                        case Status::REQUEST_CODE::DISCHARGE_SUPERHEAT:
+                        case Status::REQUEST_CODE::DISCHARGE_SUPERHEAT:                 //ID012
                             status.RcDischargeSuperHeatTemp = res.get_int16_v2(4);
                             publish_state("super_heat_temp", status.RcDischargeSuperHeatTemp);
                         break;
-                        case Status::REQUEST_CODE::SUB_COOL:
+                        case Status::REQUEST_CODE::SUB_COOL:                            //ID013
                             status.RcSubCoolTemp = res.get_int16_v2(4);
                             publish_state("sub_cool_temp", status.RcSubCoolTemp);
                         break;
-                        case Status::REQUEST_CODE::FAN_SPEED:
+                        case Status::REQUEST_CODE::T63HS_COND_TEMP:                     //ID014
+                            status.RcCondTemp = res.get_int16_v2(4);
+                            publish_state("cond_temp", status.RcCondTemp);
+                        break;
+						case Status::REQUEST_CODE::FAN_SPEED:                           //ID019
                             status.RcFanSpeedRpm = res.get_int16_v2(4);
                             publish_state("fan_speed", static_cast<float>(status.RcFanSpeedRpm));
                         break;
@@ -242,8 +255,8 @@ namespace ecodan
                     }
                 }
             } else {
-                status.RcDischargeTemp = static_cast<uint8_t>(res[7]);
-                publish_state("discharge_temp", status.RcDischargeTemp);
+                status.RcOuDischargeTemp = static_cast<uint8_t>(res[7]);
+                publish_state("ou_discharge_temp", status.RcOuDischargeTemp);
 
                 status.RcOuLiquidPipeTemp = res.get_float8(8, 39.0f);
                 publish_state("ou_liquid_pipe_temp", status.RcOuLiquidPipeTemp); 
@@ -265,6 +278,10 @@ namespace ecodan
 
                 status.RcSubCoolTemp =  res.get_float8(14, 39.0f);
                 publish_state("sub_cool_temp", status.RcSubCoolTemp);
+
+                status.RcCondTemp =  res.get_float8(14, 39.0f);
+                publish_state("cond_temp", status.RcCondTemp);
+				
             }
             break;  
         case GetType::EXTERNAL_STATE:
@@ -430,7 +447,8 @@ namespace ecodan
             publish_state("controller_version", static_cast<float>(status.Controller));
 
             // byte 10 = R410A, R32, R290
-            // status.RefrigerantCode = res[10];
+            status.RefrigerantCode = res[10];
+			publish_state("refrigerant_code", static_cast<float>(status.RefrigerantCode));
             initialCount |= 1;
 
             break;
