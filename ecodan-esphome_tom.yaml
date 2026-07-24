@@ -1,5 +1,5 @@
 substitutions:
-  name: ecodan
+  name: ecodan-tom
   friendlyName: Ecodan heatpump
 
 # enable ota update via http request
@@ -18,6 +18,7 @@ mqtt:
   discovery: true
   username: mqttuser
   password: !secret mqtt_password
+  #topic_prefix : ecodan-tom
 
 #api:
 #  reboot_timeout: 0s
@@ -25,15 +26,16 @@ mqtt:
 #    key: !secret heatpump_encryption_key
 
 # uncomment if you have multiple esp running
-esphome:
-  name_add_mac_suffix: true
+#esphome:
+  #name_add_mac_suffix: true
+  # this setting does not work as debug is occuring in ecodan. Better use topic prefix ecodan-tome
 
 external_components:
 - source:
     type: local
     path: components
   components: [ ecodan ]
-
+      
 packages:
  base: !include confs/base.yaml # required
 #  adaptive: !include confs/auto-adaptive.yaml
@@ -49,7 +51,7 @@ packages:
 # # substitutions: !include confs/ecodan-labels-nl.yaml
  substitutions: !include confs/ecodan-labels-mqtt.yaml
  dbg: !include confs/debug.yaml
- wifi: !include confs/wifi.yaml
+# wifi: !include confs/wifi.yaml
  energy: !include confs/energy.yaml
 # cpu: !include confs/cpu-monitoring.yaml
 #  #svc: !include confs/server-control-z1.yaml
@@ -129,3 +131,14 @@ ecodan:
 # uncomment line below and adjust the heat constant if your system uses a water + glycol mixture
 #  specific_heat_constant_override: 3.9
 
+wifi:
+  ssid: !secret wifi_tom_ssid
+  password: !secret wifi_tom_password
+  power_save_mode: high
+  reboot_timeout: 0s
+  ap:
+    ssid: "${name}"
+    password: "configesp"
+    ap_timeout: 15s
+
+<<: !include confs/wifi-base.yaml

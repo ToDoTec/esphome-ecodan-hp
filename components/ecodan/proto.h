@@ -95,11 +95,11 @@ namespace ecodan
         MODE_FLAGS_A = 0x26,
         UNKNOWN_0x27 = 0x27, // dhw eco mode setting        
         MODE_FLAGS_B = 0x28,        
-        UNKNOWN_0x29 = 0x29, 
+        UNKNOWN_0x29 = 0x29, // zone 1 temperature, zone 2 temperature
         ENERGY_USAGE = 0xA1,
         ENERGY_DELIVERY = 0xA2,
+        SERVICE_REQUEST_CODE = 0xA3,
         HARDWARE_CONFIGURATION = 0xC9,
-        SERVICE_REQUEST_CODE = 0xA3
     };
 
     struct InterpolationSegment {

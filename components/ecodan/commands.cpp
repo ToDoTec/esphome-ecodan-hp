@@ -227,28 +227,29 @@ namespace ecodan
         Message{MsgType::GET_CMD, GetType::TEMPERATURE_STATE_D},	//0x0D
         Message{MsgType::GET_CMD, GetType::EXTERNAL_STATE},			//0x10
         Message{MsgType::GET_CMD, GetType::ACTIVE_TIME},			//0x13
-        Message{MsgType::GET_CMD, GetType::PUMP_STATUS},			//0x15
         Message{MsgType::GET_CMD, GetType::FLOW_RATE},				//0x14
+        Message{MsgType::GET_CMD, GetType::PUMP_STATUS},			//0x15
         Message{MsgType::GET_CMD, GetType::MODE_FLAGS_A},			//0x26
         Message{MsgType::GET_CMD, GetType::MODE_FLAGS_B},			//0x28
         Message{MsgType::GET_CMD, GetType::ENERGY_USAGE},			//0xA1
         Message{MsgType::GET_CMD, GetType::ENERGY_DELIVERY},		//0xA2
-		//Message{MsgType::GET_CMD, GetType::UNKNOWN_0x06},			//0x??
     };
-        //UNKNOWN_0x06 = 0x06,
-        //UNKNOWN_0x16 = 0x16,
-        //UNKNOWN_0x17 = 0x17,
-        //UNKNOWN_0x18 = 0x18,
-        //UNKNOWN_0x19 = 0x19,
-        //UNKNOWN_0x1A = 0x1A,
-        //UNKNOWN_0x1B = 0x1B,
-        //UNKNOWN_0x1C = 0x1C,
-        //UNKNOWN_0x1D = 0x1D,
-        //UNKNOWN_0x1E = 0x1E,
-        //UNKNOWN_0x1F = 0x1F,
-        //UNKNOWN_0x20 = 0x20,
-        //UNKNOWN_0x27 = 0x27, // dhw eco mode setting        
-        //UNKNOWN_0x29 = 0x29, 
+        //UNKNOWN_0x06 = 0x06,  all null
+		//UNKNOWN_0x08 = 0x08,	no response
+		//UNKNOWN_0x0A = 0x0A,  no response
+        //UNKNOWN_0x16 = 0x16,  all null
+        //UNKNOWN_0x17 = 0x17,  all null
+        //UNKNOWN_0x18 = 0x18,  all null
+        //UNKNOWN_0x19 = 0x19,  all null
+        //UNKNOWN_0x1A = 0x1A,  all null
+        //UNKNOWN_0x1B = 0x1B,  all null
+        //UNKNOWN_0x1C = 0x1C,  all null
+        //UNKNOWN_0x1D = 0x1D,  all null
+        //UNKNOWN_0x1E = 0x1E,  all null
+        //UNKNOWN_0x1F = 0x1F,  all null
+        //UNKNOWN_0x20 = 0x20,  all null
+        //UNKNOWN_0x27 = 0x27,  all null
+        //UNKNOWN_0x29 = 0x29,	z1 and z2 temperatures
 
     struct ServiceCodeRuntime {
         Status::REQUEST_CODE Request;

@@ -20,3 +20,4 @@ sensor:
 # Logger must be at least debug (default)
 logger:
   level: debug
+  initial_level: NONE

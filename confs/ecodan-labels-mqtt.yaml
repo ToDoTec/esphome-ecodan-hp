@@ -1,6 +1,6 @@
 substitutions:
-  status_three_way_valve: flg_hb_3way
-  status_three_way_valve_2: flg_dhw_3way
+  status_three_way_valve: flg_dhw_3way
+  status_three_way_valve_2: flg_zone2_3way
   heatpump_climate_dhw: na_climate_dhw
   dhw_temp: t_dhw
   dhw_secondary_temp: na_t_dhw_second
@@ -54,13 +54,13 @@ substitutions:
   controller_version_text: st_hb_version
   controller_firmware_text: st_hb_firmware
   controller_datetime_text: st_hb_date
-  cool_consumed: e_hp_cool_consumed
-  cool_cop: cop_hp_cool
-  cool_delivered: e_hp_cool_delivered
+  cool_consumed: eng_hp_cool_cons_prevday
+  cool_cop: cop_hp_cool_prevday
+  cool_delivered: eng_hp_cool_deli_prevday
   status_defrost: flg_hb_defrost
-  dhw_consumed: e_hp_dhw_consumed
-  dhw_cop: cop_hp_dhw
-  dhw_delivered: e_hp_dhw_delivered
+  dhw_consumed: eng_hp_dhw_cons_prevday
+  dhw_cop: cop_hp_dhw_prevday
+  dhw_delivered: eng_hp_dhw_deli_prevday
   hp_feed_temp: t_hb_feed
   z1_feed_temp: t_zone1_feed
   z2_feed_temp: t_zone2_feed
@@ -72,9 +72,9 @@ substitutions:
   immersion_and_booster_heater: na_st_hb_immersion_and_booster_heater
   boiler: na_st_hb_boiler
   energy_consumed_increasing: Total Energy Consumed
-  heating_consumed: e_hp_heat_consumed
-  heating_cop: cop_hp_heat
-  heating_delivered: e_hp_heat_delivered
+  heating_consumed: eng_hp_heat_cons_prevday
+  heating_cop: cop_hp_heat_prevday
+  heating_delivered: eng_hp_heat_deli_prevday
   status_holiday: flg_hb_holiday
   status_immersion: na_flg_hb_immersion
   legionella_prevention_temp: t_hb_legionella_prevent
@@ -98,8 +98,8 @@ substitutions:
   output_power: pwr_hp_out
   computed_output_power: pwr_hp_out_computed
   computed_cop: cop_hp_computed
-  daily_computed_output_power: e_hp_daily_delivered
-  daily_repported_input_power: e_hp_daily_consumed
+  daily_computed_output_power: eng_hp_daily_delivered
+  daily_repported_input_power: eng_hp_daily_consumed
   outside_temp: t_hp_ambient
   hp_refrigerant_temp: t_hp_expvlv_highp
   hp_refrigerant_condensing_temp: na_t_hp_cond
@@ -158,12 +158,12 @@ substitutions:
   smart_boost_enabled: 'Auto-Adaptive: Smart Boost'
 
   # total increasing energy totals
-  total_increasing_heating_consumed: e_hp_heat_consumed_total
-  total_increasing_heating_delivered: e_hp_heat_delivered_total
-  total_increasing_cool_consumed: e_hp_cool_consumed_total
-  total_increasing_cool_delivered: e_hp_cool_delivered_total
-  total_increasing_dhw_consumed: e_hp_dhw_consumed_total
-  total_increasing_dhw_delivered: e_hp_dhw_delivered_total
+  total_increasing_heating_consumed: eng_hp_heat_consumed_total
+  total_increasing_heating_delivered: eng_hp_heat_delivered_total
+  total_increasing_cool_consumed: eng_hp_cool_consumed_total
+  total_increasing_cool_delivered: eng_hp_cool_delivered_total
+  total_increasing_dhw_consumed: eng_hp_dhw_consumed_total
+  total_increasing_dhw_delivered: eng_hp_dhw_delivered_total
 
   # pump details
   pump_speed: st_hb_pump_speed
